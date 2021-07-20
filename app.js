@@ -24,6 +24,24 @@
      res.status(500);
    });
  });
+
+// Route or Endpoint for creating a TaskList
+app.post('/tasklists', (req, res) => {
+  //console.log("hello i am inside post method");
+  console.log(req.body);
+
+  let taskListObj = { 'title': req.body.title };
+  TaskList(taskListObj).save()
+      .then((taskList) => {
+          res.status(201).send(taskList);
+      })
+      .catch((error) => {
+          console.log(error);
+          res.status(500);
+      });
+
+});
+
  app.get(
    'tasklists/:tasklistId',(req,res)=>{
      let tasklistId =req.params.tasklistId;
